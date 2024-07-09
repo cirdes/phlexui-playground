@@ -2,25 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-
-/* html,
+/* TODO remove essas constomizações */
+html,
 body {
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Roboto, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-} */
+}
 
-/* img {
+img {
   max-height: 100%;
-} */
+}
 
-/* mark {
+mark {
   background: #dbeafe;
   padding: 2px;
   border-radius: 6px;
-} */
+}
 
 @layer base {
   :root {
@@ -95,5 +95,85 @@ body {
     --warning-foreground: 0 0% 100%;
     --success: 84 81% 44%;
     --success-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+}
+
+@layer components {
+  .lk-h1 {
+    @apply text-2xl;
+    @apply md:text-[32px];
+    @apply text-slate-900;
+    @apply dark:text-slate-50;
+    @apply font-medium;
+  }
+
+  .lk-h2 {
+    @apply text-2xl;
+    @apply md:text-[28px];
+    @apply text-slate-900;
+    @apply dark:text-slate-50;
+    @apply font-medium;
+  }
+
+  .lk-h3 {
+    @apply text-xl;
+    @apply md:text-2xl;
+    @apply text-slate-900;
+    @apply dark:text-slate-50;
+    @apply font-medium;
+  }
+
+  .lk-h4 {
+    @apply text-base;
+    @apply md:text-xl;
+    @apply text-slate-900;
+    @apply dark:text-slate-50;
+    @apply font-medium;
+  }
+
+  .lk-p {
+    @apply text-sm;
+    @apply md:text-base;
+    @apply font-normal;
+    @apply text-slate-800;
+    @apply dark:text-slate-100;
+  }
+
+  .lk-small {
+    @apply text-xs;
+    @apply md:text-sm;
+  }
+
+  .lk-xsmall {
+    @apply text-[10px];
+    @apply md:text-xs;
+  }
+
+  .lk-title {
+    @apply text-slate-900;
+    @apply dark:text-slate-50;
+  }
+
+  .lk-secondary {
+    @apply text-slate-700;
+    @apply dark:text-slate-200;
+  }
+
+  .lk-disabled {
+    @apply text-slate-500;
+    @apply dark:text-slate-400;
   }
 }
