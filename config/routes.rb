@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     resource :combobox, only: [ :show ], controller: :react
   end
 
+  resource :phlex, only: [] do
+    resource :combobox, only: [ :show ], to: "phlex#combobox"
+  end
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
