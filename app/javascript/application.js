@@ -1,1 +1,1 @@
-import "./react/App";
+import "./App/App";
