@@ -2,20 +2,12 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{js,jsx}',
-    './components/**/*.{js,jsx}',
+    "./app/views/**/*.rb",
+    "app/views/**/*.html.erb",
     './app/**/*.{js,jsx}',
-    './src/**/*.{js,jsx}',
   ],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
