@@ -1,16 +1,15 @@
 import { Controller } from "@hotwired/stimulus";
 import { computePosition } from "@floating-ui/dom";
 import { ITEM_SELECTED } from "./combobox_item_controller";
+import { ITEM_KEY_ESC } from "./combobox_content_controller";
 
-export const POPOVER_TOGGLE = "phlexui--combobox#popoverToggle";
+export const POPOVER_OPENED = "phlexui--combobox#popoverOpened";
 
 export default class extends Controller {
   static targets = ["input", "popover", "content", "search"];
   static values = { closed: Boolean }
 
   connect() {
-    console.log("combobox controller connected");
-
     computePosition(this.inputTarget, this.popoverTarget).then(({ x, y }) => {
       Object.assign(this.popoverTarget.style, {
         left: `${x}px`,
@@ -19,10 +18,12 @@ export default class extends Controller {
     });
 
     document.addEventListener(ITEM_SELECTED, (e) => this.itemSelected(e.detail), false);
+    document.addEventListener(ITEM_KEY_ESC, () => this.toogleContent(), false);
   }
 
   disconnect() {
     document.removeEventListener(ITEM_SELECTED, (e) => this.itemSelected(e.detail), false);
+    document.removeEventListener(ITEM_KEY_ESC, () => this.toogleContent(), false);
   }
 
   onClick() {
@@ -43,14 +44,15 @@ export default class extends Controller {
     this.toogleContent();
   }
 
-
   toogleContent() {
     this.closedValue = !this.closedValue;
 
     this.popoverTarget.classList.toggle("invisible");
     this.inputTarget.setAttribute("aria-expanded", !this.closedValue);
 
-    const event = new CustomEvent(POPOVER_TOGGLE, { detail: { closed: this.closedValue } });
-    document.dispatchEvent(event);
+    if (!this.closedValue) {
+      const event = new CustomEvent(POPOVER_OPENED, { detail: { closed: this.closedValue } });
+      document.dispatchEvent(event);
+    }
   }
 }

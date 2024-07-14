@@ -23,10 +23,6 @@ module Lui
         expanded: "false",
         haspopup: "listbox",
         autocomplete: "none"
-
-        # describedby: "tooltip",
-        # activedescendant: "option1",
-        # autocomplete: "list"
       } }
     end
   end

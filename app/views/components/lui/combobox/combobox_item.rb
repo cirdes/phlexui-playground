@@ -8,7 +8,7 @@ module Lui
     end
 
     def view_template(&block)
-      li(**attrs) do
+      div(**attrs) do
         plain(helpers.lucide_icon("check", class: "text-zinc-950 invisible", size: 20, data: { lui__combobox_item_target: "check" }))
         block.call
       end
@@ -25,8 +25,9 @@ module Lui
           selected: false,
           lui__combobox_content_target: "item",
           controller: "lui--combobox-item",
-          action: "click->lui--combobox-item#click"
+          action: "click->lui--combobox-item#selectItem mouseenter->lui--combobox-item#mouseenter"
         },
+        tabindex: "0",
         role: "option"
       }
     end

@@ -1,21 +1,22 @@
 import { Controller } from "@hotwired/stimulus";
 
-import { POPOVER_TOGGLE } from "./combobox_controller";
+import { POPOVER_OPENED } from "./combobox_controller";
+
+export const ITEM_KEY_UP = "phlexui--combobox-content#keyUp";
+export const ITEM_KEY_DOWN = "phlexui--combobox-content#keyDown";
+export const ITEM_KEY_ENTER = "phlexui--combobox-content#keyEnter";
+export const ITEM_KEY_ESC = "phlexui--combobox-content#keyEsc";
 
 export default class extends Controller {
-  static targets = ["item", "empty", "group", "search"];
+  static targets = ["list", "item", "empty", "group", "search"];
 
   connect() {
-    console.log("lui--combobox-content connected");
-    document.addEventListener(POPOVER_TOGGLE, (event) => this.handlePopoverToggle(event), false);
-
-    // this.toggleVisibility(this.emptyTargets, false);
-    // this.inputTarget.focus();
-    // this.selectedIndex = -1;
+    document.addEventListener(POPOVER_OPENED, (event) => this.handlePopoverToggle(event), false);
+    this.generateItemsIds();
   }
 
   disconnect() {
-    document.removeEventListener(POPOVER_TOGGLE, (event) => this.handlePopoverToggle(event), false);
+    document.removeEventListener(POPOVER_OPENED, (event) => this.handlePopoverToggle(event), false);
   }
 
   handlePopoverToggle(event) {
@@ -29,12 +30,34 @@ export default class extends Controller {
     }
   }
 
+  handleKeyUp() {
+    const id = this.getSelectedItemId();
+
+    const event = new CustomEvent(ITEM_KEY_UP, { detail: { id } });
+    document.dispatchEvent(event);
+  }
+
+  handleKeyDown() {
+    const id = this.getSelectedItemId();
+    const length = this.itemTargets.length;
+
+    const event = new CustomEvent(ITEM_KEY_DOWN, { detail: { id, length } });
+    document.dispatchEvent(event);
+  }
+
+  handleKeyEnter() {
+    const id = this.getSelectedItemId();
+
+    const event = new CustomEvent(ITEM_KEY_ENTER, { detail: { id } });
+    document.dispatchEvent(event);
+  }
+
+  handleKeyEsc() {
+    document.dispatchEvent(new CustomEvent(ITEM_KEY_ESC));
+  }
+
   filter(event) {
-    console.log("filter contetn");
-
-
     const query = this.sanitizeStr(event.target.value);
-    console.log(query);
 
     this.toggleVisibility(this.itemTargets, false);
 
@@ -53,44 +76,14 @@ export default class extends Controller {
     });
   }
 
-  // resetVisibility() {
+  generateItemsIds() {
+    const listId = this.listTarget.getAttribute("id");
+    this.itemTargets.forEach((item, index) => {
+      if (index === 0) item.setAttribute("aria-selected", "true");
 
-  // }
-
-  // handleKeydown(e) {
-  //   const visibleItems = this.itemTargets.filter((item) => !item.classList.contains("hidden"));
-  //   if (e.key === "ArrowDown") {
-  //     e.preventDefault();
-  //     this.updateSelectedItem(visibleItems, 1);
-  //   } else if (e.key === "ArrowUp") {
-  //     e.preventDefault();
-  //     this.updateSelectedItem(visibleItems, -1);
-  //   } else if (e.key === "Enter" && this.selectedIndex !== -1) {
-  //     e.preventDefault();
-  //     visibleItems[this.selectedIndex].click();
-  //   }
-  // }
-
-  // updateSelectedItem(visibleItems, direction) {
-  //   if (this.selectedIndex >= 0) {
-  //     this.toggleAriaSelected(visibleItems[this.selectedIndex], false);
-  //   }
-
-  //   this.selectedIndex += direction;
-
-  //   // Ensure the selected index is within the bounds of the visible items
-  //   if (this.selectedIndex < 0) {
-  //     this.selectedIndex = visibleItems.length - 1;
-  //   } else if (this.selectedIndex >= visibleItems.length) {
-  //     this.selectedIndex = 0;
-  //   }
-
-  //   this.toggleAriaSelected(visibleItems[this.selectedIndex], true);
-  // }
-
-  // toggleAriaSelected(element, isSelected) {
-  //   element.setAttribute("aria-selected", isSelected.toString());
-  // }
+      item.id = `${listId}-${index}`;
+    });
+  }
 
   filterItems(query) {
     return this.itemTargets.filter((item) => this.sanitizeStr(item.innerText).includes(query));
@@ -102,5 +95,10 @@ export default class extends Controller {
 
   sanitizeStr(str) {
     return str.toLowerCase().trim();
+  }
+
+  getSelectedItemId() {
+    const selectedItem = this.itemTargets.find((item) => item.getAttribute("aria-selected") === "true");
+    return selectedItem.getAttribute("id");
   }
 }
