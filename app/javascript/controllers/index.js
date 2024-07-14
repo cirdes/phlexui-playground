@@ -5,11 +5,9 @@ import { application } from "./application";
 
 import LuiComboboxController from "app/views/components/lui/combobox/combobox_controller";
 import LuiComboboxContentController from "app/views/components/lui/combobox/combobox_content_controller";
-// import LuiComboboxSearchInputController from "app/views/components/lui/combobox/combobox_search_input_controller";
 import LuiComboboxItemController from "app/views/components/lui/combobox/combobox_item_controller";
 
 
 application.register("lui--combobox", LuiComboboxController);
 application.register("lui--combobox-content", LuiComboboxContentController);
-// application.register("lui--combobox-search-input", LuiComboboxSearchInputController);
 application.register("lui--combobox-item", LuiComboboxItemController);
