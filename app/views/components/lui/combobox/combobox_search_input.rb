@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Lui
-  class CommandInput < Base
-    def initialize(placeholder: "Type a command or search...", **attrs)
+  class ComboboxSearchInput < Base
+    def initialize(placeholder:, **attrs)
       @placeholder = placeholder
       super(**attrs)
     end
@@ -41,18 +41,14 @@ module Lui
         class:
           "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
         placeholder: @placeholder,
-        data_action:
-          "input->lui--command#filter",
-        # keydown.down->command#handleKeydown keydown.up->command#handleKeydown keydown.enter->command#handleKeydown keydown.esc->dismissable#dismiss
-        data_lui__command_target: "input",
+        data: {
+          action: "input->lui--combobox-content#filter",
+          lui__combobox_target: "search",
+          lui__combobox_content_target: "search"
+        },
         autocomplete: "off",
         autocorrect: "off",
-        spellcheck: false,
-        autofocus: true,
-        aria_autocomplete: "list",
-        role: "combobox",
-        aria_expanded: true,
-        value: ""
+        spellcheck: false
       }
     end
   end

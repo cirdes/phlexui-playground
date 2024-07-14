@@ -28,6 +28,6 @@ module PhlexuiPlayground
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    Rails.autoloaders.main.collapse("#{Rails.root}/app/views/components/lui/command")
+    Rails.autoloaders.main.collapse("#{Rails.root}/app/views/components/lui/combobox")
   end
 end

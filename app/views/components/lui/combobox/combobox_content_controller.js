@@ -1,24 +1,40 @@
 import { Controller } from "@hotwired/stimulus";
 
-// Connects to data-controller="combobox"
+import { POPOVER_TOGGLE } from "./combobox_controller";
+
 export default class extends Controller {
-  // static targets = ["input", "group", , "empty"];
-  static targets = ["input", "item", "group", "empty"];
+  static targets = ["item", "empty", "group", "search"];
 
   connect() {
-    console.log("lui--command");
-    this.inputTarget.focus();
-    this.toggleVisibility(this.emptyTargets, false);
+    console.log("lui--combobox-content connected");
+    document.addEventListener(POPOVER_TOGGLE, (event) => this.handlePopoverToggle(event), false);
+
+    // this.toggleVisibility(this.emptyTargets, false);
+    // this.inputTarget.focus();
     // this.selectedIndex = -1;
   }
 
-  filter(e) {
-    console.log("filter");
-    console.log(e);
-    // Deselect any previously selected item
-    // this.deselectAll();
+  disconnect() {
+    document.removeEventListener(POPOVER_TOGGLE, (event) => this.handlePopoverToggle(event), false);
+  }
 
-    const query = e.target.value.toLowerCase();
+  handlePopoverToggle(event) {
+    const { closed } = event.detail;
+    this.searchTarget.value = "";
+    if (!closed) {
+      this.searchTarget.focus();
+      this.toggleVisibility(this.itemTargets, true);
+      this.toggleVisibility(this.groupTargets, true);
+      this.toggleVisibility(this.emptyTargets, false);
+    }
+  }
+
+  filter(event) {
+    console.log("filter contetn");
+
+
+    const query = this.sanitizeStr(event.target.value);
+    console.log(query);
 
     this.toggleVisibility(this.itemTargets, false);
 
@@ -30,27 +46,16 @@ export default class extends Controller {
     this.updateGroupVisibility();
   }
 
-  filterItems(query) {
-    const parsedQuery = this.sanitizeString(query);
-    return this.itemTargets.filter((item) => this.sanitizeString(item.innerText).includes(parsedQuery));
-  }
-
-  toggleVisibility(elements, isVisible) {
-    elements.forEach((el) => el.classList.toggle("hidden", !isVisible));
-  }
-
   updateGroupVisibility() {
     this.groupTargets.forEach((group) => {
-      const hasVisibleItems = group.querySelectorAll("[data-lui--command-target='item']:not(.hidden)").length > 0;
+      const hasVisibleItems = group.querySelectorAll("[data-lui--combobox-content-target='item']:not(.hidden)").length > 0;
       this.toggleVisibility([group], hasVisibleItems);
     });
   }
 
-  resetVisibility() {
-    this.toggleVisibility(this.itemTargets, true);
-    this.toggleVisibility(this.groupTargets, true);
-    this.toggleVisibility(this.emptyTargets, false);
-  }
+  // resetVisibility() {
+
+  // }
 
   // handleKeydown(e) {
   //   const visibleItems = this.itemTargets.filter((item) => !item.classList.contains("hidden"));
@@ -87,12 +92,15 @@ export default class extends Controller {
   //   element.setAttribute("aria-selected", isSelected.toString());
   // }
 
-  // deselectAll() {
-  //   this.itemTargets.forEach((item) => this.toggleAriaSelected(item, false));
-  //   this.selectedIndex = -1;
-  // }
+  filterItems(query) {
+    return this.itemTargets.filter((item) => this.sanitizeStr(item.innerText).includes(query));
+  }
 
-  sanitizeString(str) {
+  toggleVisibility(elements, isVisible) {
+    elements.forEach((el) => el.classList.toggle("hidden", !isVisible));
+  }
+
+  sanitizeStr(str) {
     return str.toLowerCase().trim();
   }
 }

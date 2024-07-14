@@ -3,11 +3,13 @@
 // ./bin/rails generate stimulus controllerName
 import { application } from "./application";
 
-import LuiCommandController from "./lui/command_controller";
-import LuiCommandItemController from "./lui/command_item_controller";
-import LuiCommandPopoverController from "./lui/command_popover_controller";
+import LuiComboboxController from "app/views/components/lui/combobox/combobox_controller";
+import LuiComboboxContentController from "app/views/components/lui/combobox/combobox_content_controller";
+// import LuiComboboxSearchInputController from "app/views/components/lui/combobox/combobox_search_input_controller";
+import LuiComboboxItemController from "app/views/components/lui/combobox/combobox_item_controller";
 
 
-application.register("lui--command", LuiCommandController);
-application.register("lui--command-item", LuiCommandItemController);
-application.register("lui--command-popover", LuiCommandPopoverController);
+application.register("lui--combobox", LuiComboboxController);
+application.register("lui--combobox-content", LuiComboboxContentController);
+// application.register("lui--combobox-search-input", LuiComboboxSearchInputController);
+application.register("lui--combobox-item", LuiComboboxItemController);

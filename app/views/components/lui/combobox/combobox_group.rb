@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Lui
-  class CommandGroup < Base
+  class ComboboxGroup < Base
     def initialize(heading: nil, **attrs)
       @heading = heading
       super(**attrs)
@@ -31,7 +31,7 @@ module Lui
         role: "presentation",
         data: {
           value: @heading,
-          lui__command_target: "group"
+          lui__combobox_content_target: "group"
         }
       }
     end

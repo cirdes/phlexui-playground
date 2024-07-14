@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Lui
-  class CommandList < Base
+  class ComboboxList < Base
     def view_template(&)
       ul(**attrs, &)
     end
@@ -9,7 +9,7 @@ module Lui
     private
 
     def default_attrs
-      { class: "max-h-[300px] overflow-y-auto overflow-x-hidden", role: "listbox" }
+      { class: "max-h-[300px] overflow-y-auto overflow-x-hidden", role: "listbox", tabindex: "-1" }
     end
   end
 end

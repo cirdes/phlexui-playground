@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Lui
-  class CommandSeparator < Base
-    def view_template
-      div(**attrs)
+  class ComboboxSeparator < Base
+    def view_template(&)
+      div(**attrs, &)
     end
 
     private
