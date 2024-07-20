@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Lui
+module PhlexUI
   class ComboboxSearchInput < Base
     def initialize(placeholder:, **attrs)
       @placeholder = placeholder
@@ -42,9 +42,9 @@ module Lui
           "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
         placeholder: @placeholder,
         data: {
-          action: "input->lui--combobox-content#filter",
-          lui__combobox_target: "search",
-          lui__combobox_content_target: "search"
+          action: "input->phlexui--combobox-content#filter",
+          phlexui__combobox_target: "search",
+          phlexui__combobox_content_target: "search"
         },
         autocomplete: "off",
         autocorrect: "off",

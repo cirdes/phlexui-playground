@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Lui
+module PhlexUI
   class ComboboxItem < Base
     def initialize(value: nil, **attrs)
       @value = value
@@ -9,7 +9,7 @@ module Lui
 
     def view_template(&block)
       div(**attrs) do
-        plain(helpers.lucide_icon("check", class: "text-zinc-950 invisible", size: 20, data: { lui__combobox_item_target: "check" }))
+        plain(helpers.lucide_icon("check", class: "text-zinc-950 invisible", size: 20, data: { phlexui__combobox_item_target: "check" }))
         block.call
       end
     end
@@ -23,9 +23,9 @@ module Lui
         data: {
           value: @value,
           selected: false,
-          lui__combobox_content_target: "item",
-          controller: "lui--combobox-item",
-          action: "click->lui--combobox-item#selectItem mouseenter->lui--combobox-item#mouseenter"
+          phlexui__combobox_content_target: "item",
+          controller: "phlexui--combobox-item",
+          action: "click->phlexui--combobox-item#selectItem mouseenter->phlexui--combobox-item#mouseenter"
         },
         tabindex: "0",
         role: "option"

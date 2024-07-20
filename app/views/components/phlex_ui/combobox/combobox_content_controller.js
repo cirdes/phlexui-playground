@@ -71,7 +71,7 @@ export default class extends Controller {
 
   updateGroupVisibility() {
     this.groupTargets.forEach((group) => {
-      const hasVisibleItems = group.querySelectorAll("[data-lui--combobox-content-target='item']:not(.hidden)").length > 0;
+      const hasVisibleItems = group.querySelectorAll("[data-phlexui--combobox-content-target='item']:not(.hidden)").length > 0;
       this.toggleVisibility([group], hasVisibleItems);
     });
   }

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Lui
+module PhlexUI
   class Combobox < Base
     def view_template(&)
       div(**attrs, &)
@@ -9,7 +9,7 @@ module Lui
     private
 
     def default_attrs
-      { data: { controller: "lui--combobox", action: "click@window->lui--combobox#clickOutside", lui__combobox_closed_value: "true" } }
+      { data: { controller: "phlexui--combobox", action: "click@window->phlexui--combobox#clickOutside", phlexui__combobox_closed_value: "true" } }
     end
   end
 end

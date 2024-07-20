@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Lui
+module PhlexUI
   class ComboboxSeparator < Base
     def view_template(&)
       div(**attrs, &)
