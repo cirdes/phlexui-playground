@@ -53,6 +53,5 @@ group :development do
 end
 
 gem "phlex-rails", "~> 1.2"
-gem "lucide-rails", "0.4.0"
 
-gem "dockerfile-rails", ">= 1.6", :group => :development
+gem "dockerfile-rails", ">= 1.6", group: :development

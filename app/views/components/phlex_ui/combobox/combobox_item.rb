@@ -9,12 +9,30 @@ module PhlexUI
 
     def view_template(&block)
       div(**attrs) do
-        plain(helpers.lucide_icon("check", class: "text-zinc-950 invisible", size: 20, data: { phlexui__combobox_item_target: "check" }))
+        div(class: "invisible", data: { phlexui__combobox_item_target: "check" }) { icon }
         block.call
       end
     end
 
     private
+
+    def icon
+      svg(
+        xmlns: "http://www.w3.org/2000/svg",
+        viewbox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        class: "mr-2 h-4 w-4",
+        stroke_width: "2",
+        stroke_linecap: "round",
+        stroke_linejoin: "round"
+      ) do |s|
+        s.path(
+          d: "M20 6 9 17l-5-5",
+        )
+      end
+    end
+
 
     def default_attrs
       {
