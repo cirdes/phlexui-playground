@@ -19,28 +19,39 @@ import {
   PopoverTrigger,
 } from "../components/ui/popover"
 
-const frameworks = [
+
+const suggestions = [
   {
-    value: "next.js",
-    label: "Next.js",
+    value: "calendar",
+    label: "Calendar",
   },
   {
-    value: "sveltekit",
-    label: "SvelteKit",
+    value: "smile",
+    label: "Search Emoji",
   },
   {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
+    value: "calculator",
+    label: "Calculator",
+  }
 ]
+
+const settings = [
+  {
+    value: "profile",
+    label: "Profile",
+  },
+  {
+    value: "billing",
+    label: "Billing",
+  },
+  {
+    value: "settings",
+    label: "Settings",
+  }
+]
+
+const frameworks = [...suggestions, ...settings]
+
 function Combobox() {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
@@ -67,8 +78,28 @@ function Combobox() {
               <CommandInput placeholder="Search framework..." />
               <CommandList>
                 <CommandEmpty>No framework found.</CommandEmpty>
-                <CommandGroup>
-                  {frameworks.map((framework) => (
+                <CommandGroup heading="Suggestions">
+                  {suggestions.map((framework) => (
+                    <CommandItem
+                      key={framework.value}
+                      value={framework.value}
+                      onSelect={(currentValue) => {
+                        setValue(currentValue === value ? "" : currentValue)
+                        setOpen(false)
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          value === framework.value ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                      {framework.label}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+                <CommandGroup heading="Settings">
+                  {settings.map((framework) => (
                     <CommandItem
                       key={framework.value}
                       value={framework.value}
