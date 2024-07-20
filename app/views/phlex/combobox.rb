@@ -5,34 +5,34 @@ module Phlex
     def view_template
       div(class: "flex flex-col items-center mt-72 gap-10") do
         Combobox do
-          ComboboxTrigger(aria_controls: "list")
+          ComboboxTrigger(placeholder: "Select event...", aria_controls: "list")
           ComboboxContent(id: "list") do
-            ComboboxSearchInput(placeholder: "Search framework...")
+            ComboboxSearchInput(placeholder: "Search event...")
             ComboboxList do
               ComboboxEmpty { "No results found." }
               ComboboxGroup(heading: "Suggestions") do
-                ComboboxItem(value: "calendar") do
-                  span { "Calendar" }
+                ComboboxItem(value: "railsworld") do
+                  span { "Rails World" }
                 end
-                ComboboxItem(value: "smile") do
-                  span { "Search Emoji" }
+                ComboboxItem(value: "tropicalrb") do
+                  span { "Tropical.rb" }
                 end
-                ComboboxItem(value: "calculator") do
-                  span { "Calculator" }
+                ComboboxItem(value: "friendly.rb") do
+                  span { "Friendly.rb" }
                 end
               end
 
               ComboboxSeparator()
 
-              ComboboxGroup(heading: "Settings") do
-                ComboboxItem(value: "profile") do
-                  span { "Profile" }
+              ComboboxGroup(heading: "Others") do
+                ComboboxItem(value: "railsconf") do
+                  span { "RailsConf" }
                 end
-                ComboboxItem(value: "billing") do
-                  span { "Billing" }
+                ComboboxItem(value: "euruko") do
+                  span { "Euruko" }
                 end
-                ComboboxItem(value: "settings") do
-                  span { "Settings" }
+                ComboboxItem(value: "rubykaigi") do
+                  span { "RubyKaigi" }
                 end
               end
             end

@@ -2,10 +2,14 @@
 
 module PhlexUI
   class ComboboxTrigger < Base
+    def initialize(placeholder:, **attrs)
+      @placeholder = placeholder
+      super(**attrs)
+    end
+
     def view_template
-      puts attrs
       button(**attrs) do
-        span(data: { phlexui__combobox_target: "content" }) { "Select framework..." }
+        span(data: { phlexui__combobox_target: "content" }) { @placeholder }
         plain(helpers.lucide_icon("chevrons-up-down", class: "w-4 h-4"))
       end
     end

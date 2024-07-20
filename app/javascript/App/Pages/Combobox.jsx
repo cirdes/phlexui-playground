@@ -22,31 +22,31 @@ import {
 
 const suggestions = [
   {
-    value: "calendar",
-    label: "Calendar",
+    value: "railsworld",
+    label: "Rails World",
   },
   {
-    value: "smile",
-    label: "Search Emoji",
+    value: "tropicalrb",
+    label: "Tropical.rb",
   },
   {
-    value: "calculator",
-    label: "Calculator",
+    value: "friendlyrb",
+    label: "Friendly.rb",
   }
 ]
 
 const settings = [
   {
-    value: "profile",
-    label: "Profile",
+    value: "railsconf",
+    label: "RailsConf",
   },
   {
-    value: "billing",
-    label: "Billing",
+    value: "euruko",
+    label: "Euruko",
   },
   {
-    value: "settings",
-    label: "Settings",
+    value: "rubykaigi",
+    label: "RubyKaigi",
   }
 ]
 
@@ -69,13 +69,13 @@ function Combobox() {
             >
               {value
                 ? frameworks.find((framework) => framework.value === value)?.label
-                : "Select framework..."}
+                : "Select event..."}
               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-[200px] p-0">
             <Command>
-              <CommandInput placeholder="Search framework..." />
+              <CommandInput placeholder="Search event..." />
               <CommandList>
                 <CommandEmpty>No framework found.</CommandEmpty>
                 <CommandGroup heading="Suggestions">
@@ -98,7 +98,7 @@ function Combobox() {
                     </CommandItem>
                   ))}
                 </CommandGroup>
-                <CommandGroup heading="Settings">
+                <CommandGroup heading="Others">
                   {settings.map((framework) => (
                     <CommandItem
                       key={framework.value}
