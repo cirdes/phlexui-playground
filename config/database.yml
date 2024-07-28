@@ -13,21 +13,14 @@
 # gem "pg"
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  <% if ENV["DB_HOST"] %>
-  host: <%= ENV["DB_HOST"] %>
-  username: postgres
-  password: postgres
-  <% end %>
+  timeout: 5000
 
 
 development:
   <<: *default
-  database: phlexui_playground_development
+  database: storage/development.sqlite3
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -61,7 +54,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: phlexui_playground_test
+  database: storage/test.sqlite3
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -85,6 +78,4 @@ test:
 #
 production:
   <<: *default
-  database: phlexui_playground_production
-  username: phlexui_playground
-  password: <%= ENV["PHLEXUI_PLAYGROUND_DATABASE_PASSWORD"] %>
+  database: storage/production.sqlite3

@@ -19,28 +19,39 @@ import {
   PopoverTrigger,
 } from "../components/ui/popover"
 
-const frameworks = [
+
+const suggestions = [
   {
-    value: "next.js",
-    label: "Next.js",
+    value: "railsworld",
+    label: "Rails World",
   },
   {
-    value: "sveltekit",
-    label: "SvelteKit",
+    value: "tropicalrb",
+    label: "Tropical.rb",
   },
   {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
+    value: "friendlyrb",
+    label: "Friendly.rb",
+  }
 ]
+
+const settings = [
+  {
+    value: "railsconf",
+    label: "RailsConf",
+  },
+  {
+    value: "euruko",
+    label: "Euruko",
+  },
+  {
+    value: "rubykaigi",
+    label: "RubyKaigi",
+  }
+]
+
+const frameworks = [...suggestions, ...settings]
+
 function Combobox() {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
@@ -58,17 +69,37 @@ function Combobox() {
             >
               {value
                 ? frameworks.find((framework) => framework.value === value)?.label
-                : "Select framework..."}
+                : "Select event..."}
               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-[200px] p-0">
             <Command>
-              <CommandInput placeholder="Search framework..." />
+              <CommandInput placeholder="Search event..." />
               <CommandList>
                 <CommandEmpty>No framework found.</CommandEmpty>
-                <CommandGroup>
-                  {frameworks.map((framework) => (
+                <CommandGroup heading="Suggestions">
+                  {suggestions.map((framework) => (
+                    <CommandItem
+                      key={framework.value}
+                      value={framework.value}
+                      onSelect={(currentValue) => {
+                        setValue(currentValue === value ? "" : currentValue)
+                        setOpen(false)
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          value === framework.value ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                      {framework.label}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+                <CommandGroup heading="Others">
+                  {settings.map((framework) => (
                     <CommandItem
                       key={framework.value}
                       value={framework.value}

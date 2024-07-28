@@ -3,11 +3,11 @@
 // ./bin/rails generate stimulus controllerName
 import { application } from "./application";
 
-import LuiCommandController from "./lui/command_controller";
-import LuiCommandItemController from "./lui/command_item_controller";
-import LuiCommandPopoverController from "./lui/command_popover_controller";
+import PhlexuiComboboxController from "app/views/components/phlex_ui/combobox/combobox_controller";
+import PhlexuiComboboxContentController from "app/views/components/phlex_ui/combobox/combobox_content_controller";
+import PhlexuiComboboxItemController from "app/views/components/phlex_ui/combobox/combobox_item_controller";
 
 
-application.register("lui--command", LuiCommandController);
-application.register("lui--command-item", LuiCommandItemController);
-application.register("lui--command-popover", LuiCommandPopoverController);
+application.register("phlexui--combobox", PhlexuiComboboxController);
+application.register("phlexui--combobox-content", PhlexuiComboboxContentController);
+application.register("phlexui--combobox-item", PhlexuiComboboxItemController);
