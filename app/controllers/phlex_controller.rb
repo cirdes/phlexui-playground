@@ -6,4 +6,8 @@ class PhlexController < ApplicationController
   def combobox
     render(Phlex::Combobox.new)
   end
+
+  def tooltip
+    render(Phlex::Tooltip.new)
+  end
 end

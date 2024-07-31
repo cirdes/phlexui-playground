@@ -6,8 +6,10 @@ import { application } from "./application";
 import PhlexuiComboboxController from "app/views/components/phlex_ui/combobox/combobox_controller";
 import PhlexuiComboboxContentController from "app/views/components/phlex_ui/combobox/combobox_content_controller";
 import PhlexuiComboboxItemController from "app/views/components/phlex_ui/combobox/combobox_item_controller";
+import PhlexuiTooltipController from "app/views/components/phlex_ui/tooltip/tooltip_controller";
 
 
 application.register("phlexui--combobox", PhlexuiComboboxController);
 application.register("phlexui--combobox-content", PhlexuiComboboxContentController);
 application.register("phlexui--combobox-item", PhlexuiComboboxItemController);
+application.register("phlexui--tooltip", PhlexuiTooltipController);

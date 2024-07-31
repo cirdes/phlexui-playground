@@ -11,10 +11,12 @@ Rails.application.routes.draw do
 
   resource :shadcn, only: [] do
     resource :combobox, only: [ :show ], controller: :react
+    resource :tooltip, only: [ :show ], controller: :react
   end
 
   resource :phlex, only: [] do
     resource :combobox, only: [ :show ], to: "phlex#combobox"
+    resource :tooltip, only: [ :show ], to: "phlex#tooltip"
   end
 
   # Defines the root path route ("/")

@@ -8,6 +8,7 @@
     "@radix-ui/react-dialog": "1.1.1",
     "@radix-ui/react-popover": "1.1.1",
     "@radix-ui/react-slot": "1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.2",
     "autoprefixer": "10.4.13",
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
@@ -26,5 +27,8 @@
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.19",
+  "devDependencies": {
+    "tippy.js": "^6.3.7"
+  }
 }
