@@ -4,7 +4,7 @@ module Main
   class Index < ApplicationView
     def view_template
       div(class: "p-8") do
-        h1(class: "mb-6 text-xl font-bold text-gray-900 dark:text-white") { "PhlexUI components playground" }
+        h1(class: "mb-6 text-xl font-bold text-gray-900 dark:text-white") { "RBUI components playground" }
 
         div(class: "flex flex-col gap-4") do
           div do

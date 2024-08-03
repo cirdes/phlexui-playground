@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module PhlexUI
+module RBUI
   class TooltipTrigger < Base
     def view_template(&)
       Button(**attrs, &)
@@ -10,7 +10,7 @@ module PhlexUI
 
     def default_attrs
       {
-        data: { phlexui__tooltip_target: "trigger" },
+        data: { rbui__tooltip_target: "trigger" },
         variant: :outline,
         class: "peer"
       }

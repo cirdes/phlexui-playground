@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module PhlexUI
+module RBUI
   class Tooltip < Base
     def initialize(placement: "top", **attrs)
       @placement = placement
@@ -16,8 +16,8 @@ module PhlexUI
     def default_attrs
       {
         data: {
-          controller: "phlexui--tooltip",
-          phlexui__tooltip_placement_value: @placement
+          controller: "rbui--tooltip",
+          rbui__tooltip_placement_value: @placement
         },
         class: "group"
       }

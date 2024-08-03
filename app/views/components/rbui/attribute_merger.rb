@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module PhlexUI
+module RBUI
   class AttributeMerger
     attr_reader :default_attrs, :user_attrs
     OVERRIDE_KEY = "!"

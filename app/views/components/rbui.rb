@@ -1,3 +1,3 @@
-module PhlexUI
+module RBUI
   extend Phlex::Kit
 end

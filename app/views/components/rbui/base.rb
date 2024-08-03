@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module PhlexUI
+module RBUI
   class Base < Phlex::HTML
     attr_reader :attrs
 

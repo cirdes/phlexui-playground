@@ -3,13 +3,13 @@
 // ./bin/rails generate stimulus controllerName
 import { application } from "./application";
 
-import PhlexuiComboboxController from "app/views/components/phlex_ui/combobox/combobox_controller";
-import PhlexuiComboboxContentController from "app/views/components/phlex_ui/combobox/combobox_content_controller";
-import PhlexuiComboboxItemController from "app/views/components/phlex_ui/combobox/combobox_item_controller";
-import PhlexuiTooltipController from "app/views/components/phlex_ui/tooltip/tooltip_controller";
+import RbuiComboboxController from "app/views/components/rbui/combobox/combobox_controller";
+import RbuiComboboxContentController from "app/views/components/rbui/combobox/combobox_content_controller";
+import RbuiComboboxItemController from "app/views/components/rbui/combobox/combobox_item_controller";
+import RbuiTooltipController from "app/views/components/rbui/tooltip/tooltip_controller";
 
 
-application.register("phlexui--combobox", PhlexuiComboboxController);
-application.register("phlexui--combobox-content", PhlexuiComboboxContentController);
-application.register("phlexui--combobox-item", PhlexuiComboboxItemController);
-application.register("phlexui--tooltip", PhlexuiTooltipController);
+application.register("rbui--combobox", RbuiComboboxController);
+application.register("rbui--combobox-content", RbuiComboboxContentController);
+application.register("rbui--combobox-item", RbuiComboboxItemController);
+application.register("rbui--tooltip", RbuiTooltipController);

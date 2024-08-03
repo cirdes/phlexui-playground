@@ -2,10 +2,10 @@ import { Controller } from "@hotwired/stimulus";
 
 import { POPOVER_OPENED } from "./combobox_controller";
 
-export const ITEM_KEY_UP = "phlexui--combobox-content#keyUp";
-export const ITEM_KEY_DOWN = "phlexui--combobox-content#keyDown";
-export const ITEM_KEY_ENTER = "phlexui--combobox-content#keyEnter";
-export const ITEM_KEY_ESC = "phlexui--combobox-content#keyEsc";
+export const ITEM_KEY_UP = "rbui--combobox-content#keyUp";
+export const ITEM_KEY_DOWN = "rbui--combobox-content#keyDown";
+export const ITEM_KEY_ENTER = "rbui--combobox-content#keyEnter";
+export const ITEM_KEY_ESC = "rbui--combobox-content#keyEsc";
 
 export default class extends Controller {
   static targets = ["list", "item", "empty", "group", "search"];
@@ -71,7 +71,7 @@ export default class extends Controller {
 
   updateGroupVisibility() {
     this.groupTargets.forEach((group) => {
-      const hasVisibleItems = group.querySelectorAll("[data-phlexui--combobox-content-target='item']:not(.hidden)").length > 0;
+      const hasVisibleItems = group.querySelectorAll("[data-rbui--combobox-content-target='item']:not(.hidden)").length > 0;
       this.toggleVisibility([group], hasVisibleItems);
     });
   }
