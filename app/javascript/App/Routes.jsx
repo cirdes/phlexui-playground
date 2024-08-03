@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Combobox from "./Pages/Combobox";
 import Tooltip from "./Pages/Tooltip";
+import Select from "./Pages/Select";
 
 
 function Router() {
@@ -13,6 +14,7 @@ function Router() {
       <Routes>
         <Route path="shadcn/combobox" element={<Combobox />} />
         <Route path="shadcn/tooltip" element={<Tooltip />} />
+        <Route path="shadcn/select" element={<Select />} />
       </Routes>
     </div >
   );

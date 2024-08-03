@@ -13,6 +13,7 @@ module Main
             ul(class: "max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400") do
               li { a(href: "/phlex/combobox", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline") { "Combobox" } }
               li { a(href: "/phlex/tooltip", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline") { "Tooltip" } }
+              li { a(href: "/phlex/select", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline") { "Select" } }
             end
           end
 
@@ -22,6 +23,7 @@ module Main
             ul(class: "max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400") do
               li { a(href: "/shadcn/combobox", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline") { "Combobox" } }
               li { a(href: "/shadcn/tooltip", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline") { "Tooltip" } }
+              li { a(href: "/shadcn/select", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline") { "Select" } }
             end
           end
         end

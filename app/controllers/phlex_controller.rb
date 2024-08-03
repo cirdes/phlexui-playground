@@ -10,4 +10,8 @@ class PhlexController < ApplicationController
   def tooltip
     render(Phlex::Tooltip.new)
   end
+
+  def select
+    render(Phlex::Select.new)
+  end
 end
