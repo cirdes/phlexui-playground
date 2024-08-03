@@ -30,5 +30,7 @@ module PhlexuiPlayground
 
     Rails.autoloaders.main.inflector.inflect("phlex_ui" => "PhlexUI")
     Rails.autoloaders.main.collapse("#{Rails.root}/app/views/components/phlex_ui/combobox")
+    Rails.autoloaders.main.collapse("#{Rails.root}/app/views/components/phlex_ui/tooltip")
+    Rails.autoloaders.main.collapse("#{Rails.root}/app/views/components/phlex_ui/button")
   end
 end
