@@ -1,13 +1,9 @@
 import { Controller } from "@hotwired/stimulus";
 import { computePosition, autoUpdate, offset } from "@floating-ui/dom";
-// import { ITEM_SELECTED } from "./combobox_item_controller";
-// import { ITEM_KEY_ESC } from "./combobox_content_controller";
-
-// export const POPOVER_OPENED = "rbui--combobox#popoverOpened";
 
 export default class extends Controller {
-  static targets = ["trigger", "content", "input", "value"];
-  // static values = { closed: Boolean }
+  static targets = ["trigger", "content", "input", "value", "item"];
+  static values = { open: Boolean }
 
   constructor(...args) {
     super(...args);
@@ -16,52 +12,94 @@ export default class extends Controller {
 
   connect() {
     this.setFloatingElement();
-
-    // document.addEventListener(ITEM_SELECTED, (e) => this.itemSelected(e.detail), false);
-    // document.addEventListener(ITEM_KEY_ESC, () => this.toogleContent(), false);
+    this.generateItemsIds();
   }
 
   disconnect() {
-    // document.removeEventListener(ITEM_SELECTED, (e) => this.itemSelected(e.detail), false);
-    // document.removeEventListener(ITEM_KEY_ESC, () => this.toogleContent(), false);
     this.cleanup();
   }
 
   selectItem(event) {
+    event.preventDefault();
+
     this.inputTarget.value = event.target.dataset.value;
     this.valueTarget.innerText = event.target.innerText;
-    this.contentTarget.classList.toggle("hidden");
+
+    this.closeContent();
   }
 
   onClick() {
-    this.contentTarget.classList.toggle("hidden");
-    // this.toogleContent();
+    this.toogleContent();
+
+    if (this.openValue) {
+      this.setFocusAndCurrent();
+    } else {
+      this.resetCurrent();
+    }
   }
 
-  // clickOutside(event) {
-  //   if (this.closedValue) return;
-  //   if (this.element.contains(event.target)) return;
+  handleKeyDown() {
+    const currentIndex = this.itemTargets.findIndex((item) => item.getAttribute("aria-current") === "true");
 
-  //   event.preventDefault();
-  //   this.toogleContent();
-  // }
+    if (currentIndex + 1 < this.itemTargets.length) {
+      this.itemTargets[currentIndex].removeAttribute("aria-current");
 
-  // itemSelected({ value, label }) {
-  //   this.triggerTarget.value = value;
-  //   this.contentTarget.innerText = label;
-  //   this.toogleContent();
-  // }
+      const currentItem = this.itemTargets[currentIndex + 1];
+      currentItem.focus();
+      currentItem.setAttribute("aria-current", "true");
+      this.triggerTarget.setAttribute("aria-activedescendant", currentItem.getAttribute("id"));
+    }
+  }
+
+  handleKeyUp() {
+    const currentIndex = this.itemTargets.findIndex((item) => item.getAttribute("aria-current") === "true");
+
+    if (currentIndex > 0) {
+      this.itemTargets[currentIndex].removeAttribute("aria-current");
+
+      const currentItem = this.itemTargets[currentIndex - 1];
+      currentItem.focus();
+      currentItem.setAttribute("aria-current", "true");
+      this.triggerTarget.setAttribute("aria-activedescendant", currentItem.getAttribute("id"));
+    }
+  }
+
+  handleEsc(event) {
+    event.preventDefault();
+    this.closeContent();
+  }
+
+
+  setFocusAndCurrent() {
+    const selectedItem = this.itemTargets.find((item) => item.getAttribute("aria-selected") === "true");
+
+    if (selectedItem) {
+      selectedItem.focus();
+      selectedItem.setAttribute("aria-current", "true");
+      this.triggerTarget.setAttribute("aria-activedescendant", selectedItem.getAttribute("id"));
+    } else {
+      this.itemTarget.focus();
+      this.itemTarget.setAttribute("aria-current", "true");
+      this.triggerTarget.setAttribute("aria-activedescendant", this.itemTarget.getAttribute("id"));
+    }
+  }
+
+  resetCurrent() {
+    this.itemTargets.forEach((item) => item.removeAttribute("aria-current"));
+  }
+
+  clickOutside(event) {
+    if (!this.openValue) return;
+    if (this.element.contains(event.target)) return;
+
+    event.preventDefault();
+    this.toogleContent();
+  }
 
   toogleContent() {
-    // this.closedValue = !this.closedValue;
-
+    this.openValue = !this.openValue;
     this.contentTarget.classList.toggle("hidden");
-    // this.triggerTarget.setAttribute("aria-expanded", !this.closedValue);
-
-    // if (!this.closedValue) {
-    //   const event = new CustomEvent(POPOVER_OPENED, { detail: { closed: this.closedValue } });
-    //   document.dispatchEvent(event);
-    // }
+    this.triggerTarget.setAttribute("aria-expanded", this.openValue);
   }
 
   setFloatingElement() {
@@ -73,5 +111,22 @@ export default class extends Controller {
         });
       });
     });
+  }
+
+  generateItemsIds() {
+    const contentId = this.contentTarget.getAttribute("id");
+    this.triggerTarget.setAttribute("aria-controls", contentId);
+
+    this.itemTargets.forEach((item, index) => {
+      item.id = `${contentId}-${index}`;
+    });
+  }
+
+  closeContent() {
+    this.toogleContent();
+    this.resetCurrent();
+
+    this.triggerTarget.setAttribute("aria-activedescendant", true);
+    this.triggerTarget.focus();
   }
 }

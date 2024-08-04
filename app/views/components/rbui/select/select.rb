@@ -11,8 +11,11 @@ module RBUI
     def default_attrs
       {
         data: {
-          controller: "rbui--select"
-        }
+          controller: "rbui--select",
+          rbui__select_open_value: "false",
+          action: "click@window->rbui--select#clickOutside"
+        },
+        class: "w-full relative"
       }
     end
   end

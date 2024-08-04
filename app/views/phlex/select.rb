@@ -4,13 +4,13 @@ module Phlex
   class Select < ApplicationView
     def view_template
       div(class: "h-screen flex items-center justify-center") do
-        div(class: "w-64") do
+        div(class: "w-96") do
           Select do
-            SelectInput(value: "apple", id: "select-a-fruit")
+            SelectInput()
             SelectTrigger do
-              SelectValue(placeholder: "Select a fruit", id: "select-a-fruit") { "Apple" }
+              SelectValue(placeholder: "Select a fruit")
             end
-            SelectContent(outlet_id: "select-a-fruit") do
+            SelectContent() do
               SelectGroup do
                 SelectLabel { "Fruits" }
                 SelectItem(value: "apple") { "Apple" }
